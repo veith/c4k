@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/flowbased-polymer/mixin.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/game-board/game-board.html">
+
+<dom-module id="view-game">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100vh;
+        @apply --layout-vertical;
+      }
+
+      game-board {
+        @apply --layout-flex;
+      }
+    </style>
+    <header>header</header>
+    <game-board>view-game</game-board>
+    <footer>footer</footer>
+
+  </template>
+</dom-module>
+
+
+<script>
+  /**
+   * `view-game`
+   *
+   *
+   * @customElement
+   * @polymer
+   * @demo demo/index.html
+   * @mixes FBPMixin
+   */
+  class ViewGame extends FBPMixin(Polymer.Element) {
+    constructor() {
+      super();
+    }
+
+    static get is() {
+      return 'view-game';
+    }
+
+    static get properties() {
+      return {};
+    }
+  }
+
+  window.customElements.define(ViewGame.is, ViewGame);
+
+</script>

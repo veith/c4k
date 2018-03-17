@@ -1,0 +1,38 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../flowbased-polymer/mixin.html">
+
+<dom-module id="game-dice">
+    <template>
+        <style>
+
+        </style>
+
+    </template>
+
+    <script>
+        /**
+         * `game-dice`
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/game-dice_demo.html
+         */
+        class GameDice extends FBPMixin(Polymer.Element) {
+            constructor() {
+                super();
+            }
+
+            static get is() {
+                return 'game-dice';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+        }
+
+        window.customElements.define(GameDice.is, GameDice);
+    </script>
+</dom-module>

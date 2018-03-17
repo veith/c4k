@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="game-board">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-color: #9fbb3d;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `game-board`
+     * Das spielbrett
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class GameBoard extends Polymer.Element {
+      static get is() { return 'game-board'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'game-board'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(GameBoard.is, GameBoard);
+  </script>
+</dom-module>
