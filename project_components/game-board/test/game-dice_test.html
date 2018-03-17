@@ -1,33 +1,64 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>ui-tpl-action test</title>
+  <title>ui-tpl-action test</title>
 
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../game-dice.html">
+  <link rel="import" href="../game-dice.html">
 </head>
 <body>
 
 <test-fixture id="basic">
-    <template>
-        <game-dice></game-dice>
-    </template>
+  <template>
+    <game-dice></game-dice>
+  </template>
 </test-fixture>
 
 <script>
-    suite('game-dice', () => {
+  suite('game-dice', () => {
+    let dice;
 
-        test('instantiating the element', () => {
-            var element = fixture('basic');
-            assert.equal(element.nodeName, 'GAME-DICE');
-        });
-
+    setup(() => {
+      dice = fixture('basic');
     });
+    test('instantiating the element', () => {
+      assert.equal(dice.nodeName, 'GAME-DICE');
+    });
+
+
+    test('Sollte bei roll einen Wert zwischen (mit) 0-5 zurück geben', (done) => {
+      flush(function () {
+        let result;
+        for (let i = 0; i < 100; i++) {
+          result = dice.roll();
+          expect(result).to.be.at.least(0);
+          expect(result).to.be.at.most(5);
+        }
+        done()
+      });
+    });
+
+    test('Sollte nach dem Würfeln den gewürfelten Wert auf value haben', (done) => {
+      flush(function () {
+        let result = dice.roll();
+        assert.equal(dice.value,result);
+        done()
+      });
+    });
+
+    test('Sollte initial bei 0 sein', (done) => {
+      flush(function () {
+        assert.equal(dice.value,0);
+        done()
+      });
+    });
+
+  });
 </script>
 
 </body>

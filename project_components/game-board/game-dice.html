@@ -2,40 +2,89 @@
 <link rel="import" href="../flowbased-polymer/mixin.html">
 
 <dom-module id="game-dice">
-    <template>
-        <style>
-            :host {
-                display: block;
-                background-color: #9fbb3d;
-            }
-        </style>
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+        background-size: contain;
+        cursor: pointer;
+      }
 
-    </template>
+      :host([value="0"]) {
+        background-image: url("assets/zero.svg");
+      }
 
-    <script>
+      :host([value="1"]) {
+        background-image: url("assets/one.svg");
+      }
+
+      :host([value="2"]) {
+        background-image: url("assets/two.svg");
+      }
+
+      :host([value="3"]) {
+        background-image: url("assets/three.svg");
+      }
+
+      :host([value="4"]) {
+        background-image: url("assets/four.svg");
+      }
+
+      :host([value="5"]) {
+        background-image: url("assets/five.svg");
+      }
+
+    </style>
+
+
+  </template>
+
+  <script>
+    /**
+     * `game-dice`
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/game-dice_demo.html
+     */
+    class GameDice extends FBPMixin(Polymer.Element) {
+      constructor() {
+        super();
+      }
+
+      static get is() {
+        return 'game-dice';
+      }
+
+      static get properties() {
+        return {
+          value: {type: Number, notify: true, value: 0, reflectToAttribute: true}
+        };
+      }
+
+      /**
+       * roll the dice
+       * @returns {number}
+       */
+      roll() {
+        let result = Math.floor(Math.random() * 6);
+        this.set('value', result);
         /**
-         * `game-dice`
-         *
-         * @customElement
-         * @polymer
-         * @demo demo/game-dice_demo.html
+         * @event dice-rolled
+         * Fired when dice was rolled
+         * detail payload: value
          */
-        class GameDice extends FBPMixin(Polymer.Element) {
-            constructor() {
-                super();
-            }
 
-            static get is() {
-                return 'game-dice';
-            }
+        let customEvent = new Event('dice-rolled', {composed: true, bubbles: true});
+        customEvent.detail = result;
+        this.dispatchEvent(customEvent);
 
-            static get properties() {
-                return {
+        return result;
+      }
+    }
 
-                };
-            }
-        }
-
-        window.customElements.define(GameDice.is, GameDice);
-    </script>
+    window.customElements.define(GameDice.is, GameDice);
+  </script>
 </dom-module>
