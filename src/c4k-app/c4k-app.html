@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="c4k-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class C4kApp extends Polymer.Element {
+      static get is() { return 'c4k-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'c4k-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(C4kApp.is, C4kApp);
+  </script>
+</dom-module>
