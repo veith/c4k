@@ -588,11 +588,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 25,
+              "line": 26,
               "column": 10
             },
             "end": {
-              "line": 28,
+              "line": 29,
               "column": 11
             }
           },
@@ -3675,11 +3675,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 21,
+          "line": 22,
           "column": 4
         },
         "end": {
-          "line": 31,
+          "line": 32,
           "column": 5
         }
       },
@@ -3692,11 +3692,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 25,
+              "line": 26,
               "column": 10
             },
             "end": {
-              "line": 28,
+              "line": 29,
               "column": 11
             }
           },
@@ -3711,6 +3711,42 @@
       },
       "slots": [],
       "tagname": "game-board"
+    },
+    {
+      "description": "`game-dice`",
+      "summary": "",
+      "path": "game-dice.html",
+      "properties": [],
+      "methods": [],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "demo/game-dice_demo.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 19,
+          "column": 8
+        },
+        "end": {
+          "line": 33,
+          "column": 9
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "GameDice",
+      "attributes": [],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "game-dice"
     }
   ]
 }
