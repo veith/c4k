@@ -76,34 +76,36 @@
        * @returns {number}
        */
       roll() {
-        let diceRollStartedEvent = new Event('dice-roll-started', {composed: true, bubbles: true});
-        this.dispatchEvent(diceRollStartedEvent);
-        this._setIsRolling(true);
+        if (!this.isRolling) {
+          let diceRollStartedEvent = new Event('dice-roll-started', {composed: true, bubbles: true});
+          this.dispatchEvent(diceRollStartedEvent);
+          this._setIsRolling(true);
 
-        var counter = 0;
-        var interval = setInterval(() => {
-            let tmpResult = Math.floor(Math.random() * 6);
-            this.set('_value', tmpResult);
-            counter++;
-            if (counter === 50) {
-                let result = Math.floor(Math.random() * 6);
-                this.set('_value', result);
-                this.set('value', result);
+          var counter = 0;
+          var interval = setInterval(() => {
+              let tmpResult = Math.floor(Math.random() * 6);
+              this.set('_value', tmpResult);
+              counter++;
+              if (counter === 50) {
+                  let result = Math.floor(Math.random() * 6);
+                  this.set('_value', result);
+                  this.set('value', result);
 
-                /**
-                 * @event dice-rolled
-                 * Fired when dice was rolled
-                 * detail payload: value
-                 */
-                let diceRollEndedEvent = new Event('dice-roll-ended', {composed: true, bubbles: true});
-                diceRollEndedEvent.detail = result;
-                this.dispatchEvent(diceRollEndedEvent);
-                this._setIsRolling(false);
+                  /**
+                   * @event dice-rolled
+                   * Fired when dice was rolled
+                   * detail payload: value
+                   */
+                  let diceRollEndedEvent = new Event('dice-roll-ended', {composed: true, bubbles: true});
+                  diceRollEndedEvent.detail = result;
+                  this.dispatchEvent(diceRollEndedEvent);
+                  this._setIsRolling(false);
 
-                clearInterval(interval);
-                return result;
-            }
-        }, 100);
+                  clearInterval(interval);
+                  return result;
+              }
+          }, 100);
+        }
       }
     }
 
