@@ -1,37 +1,95 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../flowbased-polymer/mixin.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
 
 <dom-module id="select-and-compare">
-    <template>
-        <style>
-        </style>
+  <template>
+    <style>
+      :host {
+        display: inline-block;
 
-    </template>
+      }
 
-    <script>
-        /**
-         * `select-and-compare`
-         *
-         * @customElement
-         * @polymer
-         * @demo demo/select-and-compare_demo.html
-         */
-        class SelectAndCompare extends FBPMixin(Polymer.Element) {
-            constructor() {
-                super();
-            }
+      div.item {
+        width: 64px;
+        height: 64px;
+        font-size: 24px;
+        cursor: pointer;
+        border: 1px solid gray;
+        position: relative;
+      }
 
-            static get is() {
-                return 'select-and-compare';
-            }
+    </style>
+    <div on-click="_compare">
+      <dom-repeat items="[[_comparators]]">
+        <template>
+          <div class="item" data-comparator$="[[item]]">[[item]]
+            <paper-ripple></paper-ripple>
+          </div>
+        </template>
+      </dom-repeat>
+    </div>
+  </template>
 
-            static get properties() {
-                return {
+  <script>
+    /**
+     * `select-and-compare`
+     *
+     *  <select-and-compare comparators="<,=,>" val-a="[[_dice1]]" val-b="[[_dice2]]" answer-is-correct="{{answer}}"></select-and-compare>
+     * @customElement
+     * @polymer
+     * @demo demo/select-and-compare_demo.html
+     */
+    class SelectAndCompare extends FBPMixin(Polymer.Element) {
+      constructor() {
+        super();
+      }
 
-                };
-            }
+      static get is() {
+        return 'select-and-compare';
+      }
+
+      static get properties() {
+        return {
+          comparators: {type: String, observer: '_parseComparators'},
+          answerIsCorrect: {type: Boolean, notify: true},
+          inputA: {type: Number},
+          inputB: {type: Number},
+        };
+      }
+
+      /**
+       * String mit comparatoren parsen,
+       * comparatoren sind eine komma separierte Liste
+       * @param comparators
+       * @private
+       */
+      _parseComparators(comparators) {
+        this._comparators = comparators.split(',').map((e, i, a) => {
+          return e.trim();
+        });
+      }
+
+      _compare(e) {
+        let vergleicher = e.path[0].dataset.comparator;
+        if (vergleicher == "=") {
+          vergleicher = "==";
         }
+        let result = (eval(this.inputA + ' ' + vergleicher + ' ' + this.inputB));
+        if (result) {
+          /**
+           * @event result-correct
+           * Fired when result is correct
+           * detail payload: result
+           */
+          let customEvent = new Event('result-correct', {composed: true, bubbles: true});
+          customEvent.detail = result;
+          this.dispatchEvent(customEvent)
+        }
+        this.set('answerIsCorrect', result);
+      }
+    }
 
-        window.customElements.define(SelectAndCompare.is, SelectAndCompare);
-    </script>
+    window.customElements.define(SelectAndCompare.is, SelectAndCompare);
+  </script>
 </dom-module>

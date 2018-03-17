@@ -1,33 +1,51 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="game-dice.html">
+<link rel="import" href="select-and-compare.html">
 
 <dom-module id="game-board">
   <template>
     <style>
       :host {
-        display: block;
+        display: inline-block;
         background-color: #9fbb3d;
+        padding: 10px 50px;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <h2>[[title]]</h2>
+
+
+    <game-dice @-click="--diceOneClicked" ƒ-roll="--diceOneClicked, --correctAnswerGiven"
+               value="{{_diceA}}"></game-dice>
+    <select-and-compare input-a="[[_diceA]]" input-b="[[_diceB]]" comparators="[[comparators]]"
+                        answer-is-correct="{{result}}" @-result-correct="--correctAnswerGiven"></select-and-compare>
+    <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked, --correctAnswerGiven" value="{{_diceB}}"></game-dice>
+    <hr>
+    <h2>{{result}}</h2>
+
   </template>
 
   <script>
     /**
      * `game-board`
-     * Das spielbrett
+     *
      *
      * @customElement
      * @polymer
      * @demo demo/index.html
+     * @mixes FBPMixin
      */
-    class GameBoard extends Polymer.Element {
-      static get is() { return 'game-board'; }
+    class GameBoard extends FBPMixin(Polymer.Element) {
+      static get is() {
+        return 'game-board';
+      }
+
       static get properties() {
         return {
-          prop1: {
+          comparators: {
             type: String,
-            value: 'game-board'
-          }
+            value:"="
+          },
+          title:String,
         };
       }
     }
@@ -35,3 +53,5 @@
     window.customElements.define(GameBoard.is, GameBoard);
   </script>
 </dom-module>
+
+

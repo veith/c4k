@@ -1,33 +1,71 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>ui-tpl-action test</title>
+  <title>ui-tpl-action test</title>
 
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../select-and-compare.html">
+  <link rel="import" href="../select-and-compare.html">
 </head>
 <body>
 
 <test-fixture id="basic">
-    <template>
-        <select-and-compare></select-and-compare>
-    </template>
+  <template>
+    <select-and-compare></select-and-compare>
+  </template>
 </test-fixture>
 
 <script>
-    suite('select-and-compare', () => {
+  suite('select-and-compare', () => {
+    let sac;
+    setup(() => {
+      sac = fixture('basic');
+    });
+    test('instantiating the element', () => {
+      assert.equal(sac.nodeName, 'SELECT-AND-COMPARE');
+    });
 
-        test('instantiating the element', () => {
-            var element = fixture('basic');
-            assert.equal(element.nodeName, 'SELECT-AND-COMPARE');
-        });
+    test('Sollte die operatoren < = > erkennen und in seiner view darstellen können', (done) => {
+
+      sac.set('comparators', '< ,= ,> ')
+      flush(function () {
+        assert.equal(sac._comparators.length, 3);
+        done()
+      });
 
     });
+
+    test('Die Liste sollte ohne Leerzeichen sein', (done) => {
+
+      sac.set('comparators', '< ,= ,> ');
+      flush(function () {
+        assert.equal(sac._comparators[0], '<');
+        assert.equal(sac._comparators[1], '=');
+        assert.equal(sac._comparators[2], '>');
+        done()
+      });
+
+    });
+    test('Sollte den Input mit dem angetippten vergleichen und das Resultat rausgeben', (done) => {
+      sac.set('comparators', '< ,= ,> ');
+      sac.set('inputA', 1);
+      sac.set('inputB', 2);
+
+      flush(function () {
+        let buttons = sac.shadowRoot.querySelectorAll('div.item');
+
+        buttons[1].click();
+        assert.equal(sac.answerIsCorrect,false);
+        done()
+      });
+
+    });
+
+  });
 </script>
 
 </body>

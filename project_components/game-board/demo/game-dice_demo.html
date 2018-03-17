@@ -29,7 +29,7 @@
           <div style="padding: 50px;background-color: #9fbb3d">
             <game-dice @-click="--diceOneClicked" ƒ-roll="--diceOneClicked" is-rolling="{{_dice1}}"></game-dice>
 
-            <select-and-compare comparators="<,=,>" val-a="[[_dice1]]" val-b="[[_dice2]]" answer-is-correct="{{answer}}"></select-and-compare>
+
             <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked" value="{{_dice2}}"></game-dice>
             [[answer]]
 

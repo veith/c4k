@@ -12,12 +12,16 @@
         @apply --layout-vertical;
       }
 
-      game-board {
+      .flex{
         @apply --layout-flex;
       }
     </style>
     <header>header</header>
-    <game-board>view-game</game-board>
+    <div class="flex">
+      <game-board title="Level 3" comparators="<,=,>,>=,<=">view-game</game-board>
+      <game-board title="Level 2" comparators="<,=,>">view-game</game-board>
+      <game-board title="Level 0">view-game</game-board>
+    </div>
     <footer>footer</footer>
 
   </template>
