@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="92px" height="92px" viewBox="0 0 92 92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>three</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wuerfel" transform="translate(-104.000000, -321.000000)">
+            <g id="three" transform="translate(104.000000, 321.000000)">
+                <rect id="Rectangle-2" fill="#FFFFFF" x="0" y="0" width="92" height="92" rx="10"></rect>
+                <circle id="Oval-2" fill="#9FBB3D" cx="26.5" cy="26.5" r="7.5"></circle>
+                <circle id="Oval-2" fill="#9FBB3D" cx="46.5" cy="46.5" r="7.5"></circle>
+                <circle id="Oval-2" fill="#9FBB3D" cx="66.5" cy="66.5" r="7.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
