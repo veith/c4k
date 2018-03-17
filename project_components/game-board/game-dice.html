@@ -66,6 +66,8 @@
       static get properties() {
         return {
           isRolling: {type: Boolean, notify: true, value: false, readOnly: true},
+          numberOfSidesDuringRoll: {type: Number, value: 50},
+          sideShowDuration: {type: Number, value: 100},
           value: {type: Number, notify: true, value: 0, reflectToAttribute: true},
           _value: {type: Number, value: 0}
         };
@@ -83,10 +85,7 @@
 
           var counter = 0;
           var interval = setInterval(() => {
-              let tmpResult = Math.floor(Math.random() * 6);
-              this.set('_value', tmpResult);
-              counter++;
-              if (counter === 50) {
+              if (counter >= this.numberOfSidesDuringRoll - 1) {
                   let result = Math.floor(Math.random() * 6);
                   this.set('_value', result);
                   this.set('value', result);
@@ -104,7 +103,11 @@
                   clearInterval(interval);
                   return result;
               }
-          }, 100);
+
+              let tmpResult = Math.floor(Math.random() * 6);
+              this.set('_value', tmpResult);
+              counter++;
+          }, this.sideShowDuration);
         }
       }
     }

@@ -33,7 +33,6 @@
 
     test('Sollte bei roll einen Wert zwischen (mit) 0-5 zurück geben', (done) => {
       flush(function () {
-
         let handler = (e) => {
           expect(e.detail).to.be.at.least(0);
           expect(e.detail).to.be.at.most(5);
@@ -41,19 +40,22 @@
           done()
         };
         dice.addEventListener('dice-roll-ended', handler);
+        dice.numberOfSidesDuringRoll =  1;
+        dice.sideShowDuration = 1;
         dice.roll();
       });
     });
 
     test('Sollte nach dem Würfeln den gewürfelten Wert auf value haben', (done) => {
       flush(function () {
-
         let handler = (e) => {
           assert.equal(dice.value, e.detail);
           done()
         };
 
         dice.addEventListener('dice-roll-ended', handler);
+        dice.numberOfSidesDuringRoll = 1;
+        dice.sideShowDuration = 1;
         dice.roll();
       });
     });
