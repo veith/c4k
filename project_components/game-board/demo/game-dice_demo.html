@@ -27,8 +27,11 @@
       <flow-bind>
         <template>
           <div style="padding: 50px;background-color: #9fbb3d">
-          <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked" value="{{_dice}}"></game-dice>
-          <game-dice value="[[_dice]]"></game-dice>
+          <game-dice @-click="--diceOneClicked" ƒ-roll="--diceOneClicked" value="{{_dice1}}"></game-dice>
+            [[_dice1]]
+
+          <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked" value="{{_dice2}}"></game-dice>
+            [[_dice2]]
           </div>
         </template>
       </flow-bind>

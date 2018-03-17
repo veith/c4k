@@ -8,36 +8,41 @@
         display: inline-block;
         width: 64px;
         height: 64px;
-        background-size: contain;
+       
         cursor: pointer;
       }
 
-      :host([value="0"]) {
+      div{
+        background-size: contain;
+        height: 100%;
+        width: 100%;
+      }
+      div[value="0"] {
         background-image: url("assets/zero.svg");
       }
 
-      :host([value="1"]) {
+      div[value="1"] {
         background-image: url("assets/one.svg");
       }
 
-      :host([value="2"]) {
+      div[value="2"] {
         background-image: url("assets/two.svg");
       }
 
-      :host([value="3"]) {
+      div[value="3"] {
         background-image: url("assets/three.svg");
       }
 
-      :host([value="4"]) {
+      div[value="4"] {
         background-image: url("assets/four.svg");
       }
 
-      :host([value="5"]) {
+      div[value="5"] {
         background-image: url("assets/five.svg");
       }
 
     </style>
-
+    <div value$="[[_value]]"></div>
 
   </template>
 
