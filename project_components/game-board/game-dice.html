@@ -65,7 +65,9 @@
 
       static get properties() {
         return {
-          value: {type: Number, notify: true, value: 0, reflectToAttribute: true}
+          isRolling: {type: Boolean, notify: true, value: false, readOnly: true},
+          value: {type: Number, notify: true, value: 0, reflectToAttribute: true},
+          _value: {type: Number, value: 0}
         };
       }
 
@@ -74,19 +76,34 @@
        * @returns {number}
        */
       roll() {
-        let result = Math.floor(Math.random() * 6);
-        this.set('value', result);
-        /**
-         * @event dice-rolled
-         * Fired when dice was rolled
-         * detail payload: value
-         */
+        let diceRollStartedEvent = new Event('dice-roll-started', {composed: true, bubbles: true});
+        this.dispatchEvent(diceRollStartedEvent);
+        this._setIsRolling(true);
 
-        let customEvent = new Event('dice-rolled', {composed: true, bubbles: true});
-        customEvent.detail = result;
-        this.dispatchEvent(customEvent);
+        var counter = 0;
+        var interval = setInterval(() => {
+            let tmpResult = Math.floor(Math.random() * 6);
+            this.set('_value', tmpResult);
+            counter++;
+            if (counter === 50) {
+                let result = Math.floor(Math.random() * 6);
+                this.set('_value', result);
+                this.set('value', result);
 
-        return result;
+                /**
+                 * @event dice-rolled
+                 * Fired when dice was rolled
+                 * detail payload: value
+                 */
+                let diceRollEndedEvent = new Event('dice-roll-ended', {composed: true, bubbles: true});
+                diceRollEndedEvent.detail = result;
+                this.dispatchEvent(diceRollEndedEvent);
+                this._setIsRolling(false);
+
+                clearInterval(interval);
+                return result;
+            }
+        }, 100);
       }
     }
 
