@@ -27,10 +27,11 @@
       <flow-bind>
         <template>
           <div style="padding: 50px;background-color: #9fbb3d">
-          <game-dice @-click="--diceOneClicked" ƒ-roll="--diceOneClicked" value="{{_dice1}}"></game-dice>
+            <game-dice @-click="--diceOneClicked" ƒ-roll="--diceOneClicked" is-rolling="{{_dice1}}"></game-dice>
             [[_dice1]]
 
-          <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked" value="{{_dice2}}"></game-dice>
+            <compare-box val-a="[[_dice1]]" val-b="[[_dice2]]"></compare-box>
+            <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked" value="{{_dice2}}"></game-dice>
             [[_dice2]]
           </div>
         </template>
@@ -45,7 +46,7 @@
       <flow-bind>
         <template>
           <div style="padding: 50px;background-color: #9fbb3d">
-          <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked"></game-dice>
+            <game-dice @-click="--diceClicked" ƒ-roll="--diceClicked"></game-dice>
           </div>
         </template>
       </flow-bind>

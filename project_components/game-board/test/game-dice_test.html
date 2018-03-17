@@ -33,27 +33,34 @@
 
     test('Sollte bei roll einen Wert zwischen (mit) 0-5 zurück geben', (done) => {
       flush(function () {
-        let result;
-        for (let i = 0; i < 100; i++) {
-          result = dice.roll();
-          expect(result).to.be.at.least(0);
-          expect(result).to.be.at.most(5);
-        }
-        done()
+
+        let handler = (e) => {
+          expect(e.detail).to.be.at.least(0);
+          expect(e.detail).to.be.at.most(5);
+          dice.removeEventListener('dice-roll-ended', handler)
+          done()
+        };
+        dice.addEventListener('dice-roll-ended', handler);
+        dice.roll();
       });
     });
 
     test('Sollte nach dem Würfeln den gewürfelten Wert auf value haben', (done) => {
       flush(function () {
-        let result = dice.roll();
-        assert.equal(dice.value,result);
-        done()
+
+        let handler = (e) => {
+          assert.equal(dice.value, e.detail);
+          done()
+        };
+
+        dice.addEventListener('dice-roll-ended', handler);
+        dice.roll();
       });
     });
 
     test('Sollte initial bei 0 sein', (done) => {
       flush(function () {
-        assert.equal(dice.value,0);
+        assert.equal(dice.value, 0);
         done()
       });
     });

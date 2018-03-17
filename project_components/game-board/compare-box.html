@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../flowbased-polymer/mixin.html">
+
+<dom-module id="compare-box">
+    <template>
+        <style>
+        </style>
+
+    </template>
+
+    <script>
+        /**
+         * `compare-box`
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/compare-box_demo.html
+         */
+        class CompareBox extends FBPMixin(Polymer.Element) {
+            constructor() {
+                super();
+            }
+
+            static get is() {
+                return 'compare-box';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+        }
+
+        window.customElements.define(CompareBox.is, CompareBox);
+    </script>
+</dom-module>
